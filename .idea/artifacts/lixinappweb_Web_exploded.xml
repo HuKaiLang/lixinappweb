@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="lixinappweb:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/lixinappweb_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lixinappweb/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lixinappweb" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.47" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
