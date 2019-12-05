@@ -2,6 +2,7 @@ package edu.lixin.weixin.servlet;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import edu.lixin.factory.BeanFactory;
 import edu.lixin.weixin.model.App;
 import edu.lixin.weixin.service.IAppsService;
@@ -21,7 +22,7 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/weixin/getapps")
 public class AppsServlet extends HttpServlet {
 
-    private IAppsService service = BeanFactory.getInstance("appsService",IAppsService.class);
+    private static IAppsService service = BeanFactory.getInstance("appsService",IAppsService.class);
 
 
     @Override
@@ -35,15 +36,7 @@ public class AppsServlet extends HttpServlet {
         List<App> list = service.query();
         System.out.println(list.toString());
 
-        Map<String,String> param1 = new HashMap<String,String>();
-        param1.put("UserName","username");
-        param1.put("PassWd","password");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",param1);
-        System.out.println(jsonObject.toString());
-        System.out.println(jsonObject.toJSONString());
-
-        outputStream.write(JSON.toJSONBytes(list));
+        outputStream.write(JSON.toJSONBytes(list, SerializerFeature.WriteMapNullValue));
         outputStream.flush();
     }
 }

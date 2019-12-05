@@ -18,9 +18,9 @@ public class AppsDao implements IAppsDao {
 
     @Override
     public void add(App app) {
-        String sql = "insert into apps(app_name,app_id,app_status,app_page_uri) values(?,?,?,?);";
+        String sql = "insert into apps(app_name,app_id,app_status,app_page_uri,app_icon_uri) values(?,?,?,?,?);";
         try{
-            qr.update(sql,app.getApp_name(),app.getApp_id(),app.getApp_status(),app.getApp_page_uri());
+            qr.update(sql,app.getApp_name(),app.getApp_id(),app.getApp_status(),app.getApp_page_uri(),app.getApp_icon_uri());
         }catch(Exception e){
             System.out.println("-------------- AppsDao add Exceptions -------------------");
             throw new RuntimeException(e);
@@ -41,8 +41,8 @@ public class AppsDao implements IAppsDao {
     @Override
     public void update(App app) {
         try{
-            String sql = "update apps set app_name=?,app_status=?,app_page_uri=? where app_id=?";
-            qr.update(sql,app.getApp_name(),app.getApp_status(),app.getApp_page_uri());
+            String sql = "update apps set app_name=?,app_status=?,app_page_uri=?,app_icon_uri=? where app_id=?";
+            qr.update(sql,app.getApp_name(),app.getApp_status(),app.getApp_page_uri(),app.getApp_icon_uri(),app.getApp_id());
         }catch (Exception e){
             System.out.println("---- AppsDao update Exceptions ----");
             throw new RuntimeException(e);

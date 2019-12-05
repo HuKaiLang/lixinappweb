@@ -5,6 +5,15 @@ public class App {
     private int app_id;
     private String app_status;
     private String app_page_uri;
+    private String app_icon_uri;
+
+    public String getApp_icon_uri() {
+        return app_icon_uri;
+    }
+
+    public void setApp_icon_uri(String app_icon_uri) {
+        this.app_icon_uri = app_icon_uri;
+    }
 
     public String getApp_name() {
         return app_name;
@@ -45,6 +54,7 @@ public class App {
                 ", app_id=" + app_id +
                 ", app_status='" + app_status + '\'' +
                 ", app_page_uri='" + app_page_uri + '\'' +
+                ", app_icon_uri='" + app_icon_uri + '\'' +
                 '}';
     }
 
