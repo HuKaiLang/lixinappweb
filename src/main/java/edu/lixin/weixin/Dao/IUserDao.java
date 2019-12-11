@@ -16,6 +16,10 @@ public interface IUserDao {
 
     User findById(int user_id);
 
+    User userLogin(String user_name,String user_password);
+
+    User findBySchoolId(int user_school_id);
+
     List<User>query(String keyword);
 
     int getTotalCount(PageBean<User> pb);

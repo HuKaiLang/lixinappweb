@@ -13,6 +13,7 @@ public class User {
     private float user_charge;
     private String user_account_state;
     private String user_avatar_path;
+    private String user_md5_password;
 
     public int getUser_id() {
         return user_id;
@@ -95,6 +96,14 @@ public class User {
         this.user_gender = user_gender;
     }
 
+    public String getUser_md5_password() {
+        return user_md5_password;
+    }
+
+    public void setUser_md5_password(String user_md5_password) {
+        this.user_md5_password = user_md5_password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -108,6 +117,7 @@ public class User {
                 ", user_charge=" + user_charge +
                 ", user_account_state='" + user_account_state + '\'' +
                 ", user_avatar_path='" + user_avatar_path + '\'' +
+                ", user_md5_password='" + user_md5_password + '\'' +
                 '}';
     }
 

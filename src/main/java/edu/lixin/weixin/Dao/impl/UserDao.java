@@ -4,8 +4,11 @@ import edu.lixin.utils.JdbcUtils;
 import edu.lixin.utils.PageBean;
 import edu.lixin.weixin.Dao.IUserDao;
 import edu.lixin.weixin.model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.util.List;
 
@@ -22,7 +25,8 @@ public class UserDao implements IUserDao {
                 "user_school_id," +
                 "user_charge," +
                 "user_account_state," +
-                "user_avatar_path) values(?,?,?,?,?,?,?,?,?,?);";
+                "user_avatar_path," +
+                "user_md5_password) values(?,?,?,?,?,?,?,?,?,?,?);";
         try{
             qr.update(sql,
                     user.getUser_id(),
@@ -34,7 +38,8 @@ public class UserDao implements IUserDao {
                     user.getUser_school_id(),
                     user.getUser_charge(),
                     user.getUser_account_state(),
-                    user.getUser_avatar_path()
+                    user.getUser_avatar_path(),
+                    user.getUser_md5_password()
                     );
         }catch(Exception e){
             System.out.println("--- UserDao Exception ---");
@@ -64,7 +69,8 @@ public class UserDao implements IUserDao {
                 "user_school_id=?," +
                 "user_charge=?," +
                 "user_account_state=?," +
-                "user_avatar_path=? where user_id=?";
+                "user_avatar_path=?," +
+                "user_md5_password=? where user_id=?";
         try{
             qr.update(sql,user.getUser_name(),
                     user.getUser_gender(),
@@ -75,6 +81,7 @@ public class UserDao implements IUserDao {
                     user.getUser_charge(),
                     user.getUser_account_state(),
                     user.getUser_avatar_path(),
+                    user.getUser_md5_password(),
                     user.getUser_id());
         }catch (Exception e){
             System.out.println("--- UserDao Exception ---");
@@ -95,16 +102,58 @@ public class UserDao implements IUserDao {
 
     @Override
     public User findById(int user_id) {
-        return null;
+        String sql = "select * from user where user_id=?";
+        try{
+            return qr.query(sql,new BeanHandler<User>(User.class),user_id);
+        }catch(Exception e){
+            System.out.println("--- UserDao Exceptions ---");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<User> query(String keyword) {
-        return null;
+        try{
+            String sql = "select * from user where user_name like ?";
+            return qr.query(sql,new BeanListHandler<User>(User.class),"%"+keyword+"%");
+        }catch(Exception e){
+            System.out.println("--- UserDao Exceptions ---");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public int getTotalCount(PageBean<User> pb) {
-        return 0;
+        try{
+            String sql = "select * from user";
+            Long count = qr.query(sql,new ScalarHandler<Long>());
+            return count.intValue();
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public User userLogin(String user_name, String user_password) {
+        String sql = "select * from user where user_name=? and user_md5_password=?";
+        String user_md5_password = DigestUtils.md5Hex(user_password);
+        try{
+            return qr.query(sql,new BeanHandler<User>(User.class),user_name,user_md5_password);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public User findBySchoolId(int user_school_id) {
+        String sql = "select * from user where user_school_id=?";
+        try{
+            return qr.query(sql,new BeanHandler<User>(User.class),user_school_id);
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }
