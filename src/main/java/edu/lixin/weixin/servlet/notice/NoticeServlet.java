@@ -87,6 +87,8 @@ public class NoticeServlet extends HttpServlet {
             }
         }
 
+        Notice notice;
+
         switch (method){
             case "query":
                 List<Notice> list = service.query();
@@ -94,7 +96,7 @@ public class NoticeServlet extends HttpServlet {
                 outputStream.flush();
                 break;
             case "update":
-                Notice notice = new Notice();
+                notice = new Notice();
                 try {
                     BeanUtils.setProperty(notice,"notice_id",notice_id);
                     BeanUtils.setProperty(notice, "notice_title", notice_title);

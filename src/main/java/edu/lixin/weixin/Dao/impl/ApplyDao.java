@@ -56,9 +56,9 @@ public class ApplyDao implements IApplyDao {
                 "user_school_id=?," +
                 "apply_reason=?," +
                 "apply_grade=?," +
-                "apply_department=?" +
-                "apply_state" +
-                "apply_create_date where apply_id="+apply.getApply_id();
+                "apply_department=?," +
+                "apply_state=?," +
+                "apply_create_date=? where apply_id="+apply.getApply_id();
         try{
             qr.update(sql,
                     apply.getApply_type(),

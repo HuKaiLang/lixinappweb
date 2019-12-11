@@ -127,7 +127,7 @@
     }
 </script>
 <html>
-
+<jsp:forward page="login.jsp"></jsp:forward>
 <head>
     <title>管理系统</title>
 </head>

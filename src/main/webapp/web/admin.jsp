@@ -29,24 +29,28 @@
     <link rel="stylesheet" type="text/css" href="./themes/icon.css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.easyui.min.js"></script>
+    <script type="text/css">
+
+    </script>
+
     <script type="text/javascript">
         function addItem() {
             console.log("addItem function called");
-            $('#dlg').dialog('open').dialog('setTitle', 'New Notice');
+            $('#dlg').dialog('open').dialog('setTitle', 'New Apply');
             $('#dialog').form('clear');
         }
 
-        function editNotice() {
+        function editItem() {
             console.log("editItem function called");
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $('#dlg').dialog('open').dialog('setTitle', 'Edit Notice');
+                $('#dlg').dialog('open').dialog('setTitle', 'Edit Apply');
                 $('#fm').form('load', row);
             } else {
                 $.messager.show({
-                title: 'Error',
-                msg: "请先选择一条数据"
-            })
+                    title: 'Error',
+                    msg: "请先选择一条数据"
+                })
             }
         }
 
@@ -54,11 +58,11 @@
             console.log("deleteItem function called");
             var row = $('#dg').datagrid('getSelected');
             if (row) {
-                $.messager.confirm("Confirm", "Are you sure to delete this notice", function (r) {
+                $.messager.confirm("Confirm", "Are you sure to delete this Apply?", function (r) {
                     if (r) {
-                        $.post('weixin/notices', {
+                        $.post('weixin/applies', {
                             method: "delete",
-                            notice_id: row.notice_id
+                            apply_id: row.apply_id
                         }, function (result) {
                             if (result.code = 200) {
                                 $('#dlg').dialog('close');
@@ -82,39 +86,44 @@
         }
 
         function saveItem() {
-            var notice_id = $("[name='notice_id']").val();
-            var notice_title = $("[name='notice_title']").val();
-            var notice_text_content = $("[name='notice_text_content']").val();
-            var notice_type = $("[name='notice_type']").val();
-            var notice_date = $("[name='notice_date']").val();
-            var notice_state = $("[name='notice_state']").val();
-            var notice_img_path = $("[name='notice_img_path']").val();
-            var title = $('#dlg').panel('options').title
-            if (notice_img_path == "") {
-                console.log("notice img path equals to undefined");
-                notice_img_path = undefined;
-            }
-            if (title == 'New Notice') {
+            var apply_id = $("[name='apply_id']").val();
+            var apply_type = $("[name='apply_type']").val();
+            var apply_name = $("[name='apply_name']").val();
+            var user_school_id = $("[name='user_school_id']").val();
+            var apply_reason = $("[name='apply_reason']").val();
+            var apply_grade = $("[name='apply_grade']").val();
+            var apply_department = $("[name='apply_department']").val();
+            var apply_state = $("[name='apply_state']").val();
+            var apply_create_date = $("[name='apply_create_date']").val();
+
+            var title = $('#dlg').panel('options').title;
+
+            if (title == 'New Apply') {
                 $.ajax({
-                    url: "weixin/notices",
+                    url: "weixin/applies",
                     type: "get",
                     data: {
                         method: "add",
-                        notice_id: notice_id,
-                        notice_title: notice_title,
-                        notice_text_content: notice_text_content,
-                        notice_type: notice_type,
-                        notice_date: notice_date,
-                        notice_state: notice_state,
-                        notice_img_path: notice_img_path
+                        apply_id: apply_id,
+                        apply_type: apply_type,
+                        apply_name: apply_name,
+                        user_school_id: user_school_id,
+                        apply_reason: apply_reason,
+                        apply_grade: apply_grade,
+                        apply_department: apply_department,
+                        apply_state: apply_state,
+                        apply_create_date: apply_create_date
                     },
                     dataType: "json",
                     success: function (result) {
                         console.log("result = ", result);
                         if (result.code = 200) {
-                            alert('保存成功')
                             $('#dialog').dialog('close');
                             $('#dg').datagrid('reload');
+                            $.messager.show({
+                                title: "成功",
+                                msg: "已添加新数据"
+                            })
                         } else {
                             $.messager.show({
                                 title: 'Error',
@@ -125,23 +134,29 @@
                 })
             } else {
                 $.ajax({
-                    url: "weixin/notices",
+                    url: "weixin/applies",
                     type: 'get',
                     data: {
                         method: 'update',
-                        notice_id: notice_id,
-                        notice_title: notice_title,
-                        notice_text_content: notice_text_content,
-                        notice_type: notice_type,
-                        notice_date: notice_date,
-                        notice_state: notice_state,
-                        notice_img_path: notice_img_path
+                        apply_id: apply_id,
+                        apply_type: apply_type,
+                        apply_name: apply_name,
+                        user_school_id: user_school_id,
+                        apply_reason: apply_reason,
+                        apply_grade: apply_grade,
+                        apply_department: apply_department,
+                        apply_state: apply_state,
+                        apply_create_date: apply_create_date
                     },
                     dataType: 'json',
                     success: function (result) {
                         if (result.code == 200) {
                             $('#dlg').dialog('close');
                             $('#dg').datagrid('reload');
+                            $.messager.show({
+                                title: "成功",
+                                msg: "已更新数据"
+                            })
                         } else {
                             $.messager.show({
                                 title: 'Error',
@@ -154,7 +169,8 @@
         }
     </script>
 </head>
-
+<%-- 检查用户身份 --%>
+<jsp:include page="checkLogin.jsp"></jsp:include>
 <body>
 <div id="wrapper">
     <div id="sidebar-wrapper">
@@ -173,7 +189,7 @@
                     <div>
                         <h1>管理菜单</h1>
                     </div>
-                    <table id="dg" title="学生事务申请表" class="easyui-datagrid" style="width: 100%;height: 250px"
+                    <table id="dg" title="学生事务申请表" class="easyui-datagrid" style="width: 100%;height: 100%"
                            url="weixin/applies?method=query" method="get" toolbar="#toolbar"
                            rownumbers="true"
                            fitColumns="true" singleSelect="true">
@@ -192,63 +208,65 @@
                         </thead>
                     </table>
                     <div id="toolbar">
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">Add
-                            App</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editItem()">Edit
-                            App</a>
+                        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>
+                        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                           onclick="editItem()">修改</a>
                         <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-                           onclick="deleteNotice()">Delete App</a>
+                           onclick="deleteItem()">删除</a>
                     </div>
                     <div id="dlg" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
                          closed="true"
                          buttons="#dlg-buttons">
-                        <div class="ftitle">Notice Information</div>
+                        <div class="ftitle">Apply Information</div>
                         <form id="fm" method="post">
-                            <div class="fitem">
-                                <label>Notice ID</label>
-                                <input name="notice_id" class="easyui-validatebox" hidden="true">
+                            <div class="fitem" hidden="true">
+                                <label>Apply ID</label>
+                                <input name="apply_id" class="easyui-validatebox" hidden="true">
                             </div>
                             <div class="fitem">
-                                <label>Notice title</label>
-                                <input name="notice_title" class="easyui-validatebox" required="true"/>
+                                <label>申请类型</label>
+                                <input name="apply_type" class="easyui-validatebox" required="true"/>
                             </div>
                             <div class="fitem">
-                                <label>notice text content</label>
-                                <input name="notice_text_content" required="true"/>
+                                <label>申请人姓名</label>
+                                <input name="apply_name" required="true"/>
                             </div>
                             <div class="fitem">
-                                <label>notice img path</label>
-                                <input name="notice_img_path"/>
+                                <label>申请人学号</label>
+                                <input name="user_school_id" required="true"/>
                             </div>
                             <div class="fitem">
-                                <label>notice type</label>
-                                <input name="notice_type"/>
+                                <label>申请理由</label>
+                                <input name="apply_reason" required="true"/>
                             </div>
                             <div class="fitem">
-                                <label>notice date</label>
-                                <input name="notice_date"/>
+                                <label>申请人年级</label>
+                                <input name="apply_grade"/>
                             </div>
                             <div class="fitem">
-                                <label>notice state</label>
-                                <input name="notice_state"/>
+                                <label>申请人院系</label>
+                                <input name="apply_department"/>
                             </div>
                             <div class="fitem">
-                                <label>user id</label>
-                                <input name="user_id"/>
+                                <label>申请项状态</label>
+                                <input name="apply_state"/>
+                            </div>
+                            <div class="fitem">
+                                <label>申请项创建时间</label>
+                                <input name="apply_create_date"/>
                             </div>
                         </form>
                     </div>
                     <div id="dlg-buttons">
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveItem()">Save</a>
+                        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveItem()">保存</a>
                         <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
-                           onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
+                           onclick="javascript:$('#dlg').dialog('close')">取消</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
@@ -256,7 +274,6 @@
 <script src="assets/js/theme.js"></script>
 <script src="assets/js/Advanced-NavBar---Multi-dropdown.js"></script>
 <script src="assets/js/Sidebar-Menu.js"></script>
-<script src="assets/js/weixinapp/webapp.js"></script>
 </body>
 
 </html>

@@ -29,7 +29,7 @@
 
 <body>
 <div class="login-dark">
-    <form method="post" action="admin.jsp">
+    <form method="post" action="/userLogin">
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
         <% if (request.getAttribute("message") != null)
