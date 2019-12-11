@@ -1,0 +1,8 @@
+.dialog-fm{
+    display: flex;
+    flex-direction: column;
+}
+.fm-item{
+    display: flex;
+    align-items: center;
+}

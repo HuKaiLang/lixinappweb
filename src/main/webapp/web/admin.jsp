@@ -29,10 +29,7 @@
     <link rel="stylesheet" type="text/css" href="./themes/icon.css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.easyui.min.js"></script>
-    <script type="text/css">
-
-    </script>
-
+    <script type="text/css" src="webapp/admin.css"></script>
     <script type="text/javascript">
         function addItem() {
             console.log("addItem function called");
@@ -217,41 +214,41 @@
                     <div id="dlg" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
                          closed="true"
                          buttons="#dlg-buttons">
-                        <div class="ftitle">Apply Information</div>
-                        <form id="fm" method="post">
+                        <div style="text-align: center" class="ftitle">申请信息</div>
+                        <form id="fm" method="post" class="dialog-fm">
                             <div class="fitem" hidden="true">
-                                <label>Apply ID</label>
+                                <label >Apply ID</label>
                                 <input name="apply_id" class="easyui-validatebox" hidden="true">
                             </div>
-                            <div class="fitem">
-                                <label>申请类型</label>
-                                <input name="apply_type" class="easyui-validatebox" required="true"/>
+                            <div class="fitem fm-item">
+                                <label style="flex: 1">申请类型</label>
+                                <input style="flex: 1" name="apply_type" class="easyui-validatebox" required="true"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请人姓名</label>
                                 <input name="apply_name" required="true"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请人学号</label>
-                                <input name="user_school_id" required="true"/>
+                                <input name="user_school_id" class="easyui-validatebox" data-options="validType:['number','length[5,20]']" required="true"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请理由</label>
-                                <input name="apply_reason" required="true"/>
+                                <textarea name="apply_reason" required="true"></textarea>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请人年级</label>
                                 <input name="apply_grade"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请人院系</label>
                                 <input name="apply_department"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请项状态</label>
                                 <input name="apply_state"/>
                             </div>
-                            <div class="fitem">
+                            <div class="fitem fm-item">
                                 <label>申请项创建时间</label>
                                 <input name="apply_create_date"/>
                             </div>
