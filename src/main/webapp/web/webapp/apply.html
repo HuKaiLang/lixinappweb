@@ -75,11 +75,25 @@
         </div>
         <div class="fitem fm-item">
             <label>申请人院系</label>
-            <input name="apply_department"/>
+            <select name="apply_department" required="true">
+                <option value="金融学院">金融学院</option>
+                <option value="保险学院">保险学院</option>
+                <option value="会计学院">会计学院</option>
+                <option value="信息管理学院">信息管理学院</option>
+                <option value="金融科技学院">金融科技学院</option>
+                <option value="统计与数学学院">统计与数学学院</option>
+                <option value="人文艺术学院">人文艺术学院</option>
+                <option value="潘序伦学院">潘序伦学院</option>
+            </select>
         </div>
         <div class="fitem fm-item">
             <label>申请项状态</label>
-            <input name="apply_state"/>
+            <select name="apply_state" required="true">
+                <option value="review">待审核</option>
+                <option value="pass">通过</option>
+                <option value="reject">拒绝通过</option>
+                <option value="close">关闭</option>
+            </select>
         </div>
         <div class="fitem fm-item">
             <label>申请项创建时间</label>
