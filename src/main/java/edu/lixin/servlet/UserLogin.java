@@ -52,8 +52,14 @@ public class UserLogin extends HttpServlet {
             User user = service.userLogin(user_name, user_password);
 
             if (user != null) {
-                session.setAttribute("user", user);
-                req.getRequestDispatcher("admin.jsp").forward(req, resp);
+                if(user.getUser_identity().equals("admin"))
+                {
+                    session.setAttribute("user", user);
+                    req.getRequestDispatcher("admin.jsp").forward(req, resp);
+                }else {
+                    req.setAttribute("message","用户没有权限登录");
+                    req.getRequestDispatcher("login.jsp").forward(req,resp);
+                }
             } else {
                 req.setAttribute("message", "账户名或密码错误");
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
