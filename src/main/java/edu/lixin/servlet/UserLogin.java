@@ -1,13 +1,8 @@
 package edu.lixin.servlet;
 
-import com.alibaba.fastjson.JSONObject;
 import edu.lixin.factory.BeanFactory;
 import edu.lixin.weixin.model.User;
 import edu.lixin.weixin.service.IUserService;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,14 +48,20 @@ public class UserLogin extends HttpServlet {
             user_password = req.getParameter("password");
         }
 
-        User user = service.userLogin(user_name, user_password);
+        if (user_name != null && user_password != null){
+            User user = service.userLogin(user_name, user_password);
 
-        if (user != null) {
-            session.setAttribute("user", user);
-            req.getRequestDispatcher("admin.jsp").forward(req, resp);
-        } else {
-            req.setAttribute("message", "账户名或密码错误");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            if (user != null) {
+                session.setAttribute("user", user);
+                req.getRequestDispatcher("admin.jsp").forward(req, resp);
+            } else {
+                req.setAttribute("message", "账户名或密码错误");
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+            }
+        }else {
+            req.setAttribute("message","用户已过期，请重新登录");
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
         }
+
     }
 }
