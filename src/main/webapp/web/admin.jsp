@@ -39,9 +39,9 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand"><a href="#">主界面</a></li>
-            <li><a href="#">学生事务审核</a></li>
-            <li><a href="#">奖学金申请审核</a></li>
-            <li><a href="#">登出</a></li>
+            <li><a href="#" onclick="loadApply()">学生事务审核</a></li>
+            <li><a href="#" onclick="loadAward()">奖学金申请审核</a></li>
+            <li><a href="login.jsp">登出</a></li>
         </ul>
     </div>
     <div class="page-content-wrapper">
