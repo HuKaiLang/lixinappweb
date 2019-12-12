@@ -98,7 +98,7 @@ public class NoticeDao implements INoticeDao {
     @Override
     public Notice findById(int notice_id) {
         try{
-            String sql = "select * from posters where poster_id=?";
+            String sql = "select * from notice where notice_id=?";
             return qr.query(sql,new BeanHandler<Notice>(Notice.class),notice_id);
         } catch(Exception e){
             System.out.println("--- NoticeDao Exception ---");
