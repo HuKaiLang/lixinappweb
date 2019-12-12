@@ -99,6 +99,14 @@ public class ApplyServlet extends HttpServlet {
                     outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
                     outputStream.flush();
                 } catch (Exception e) {
+                    // 返回错误信息
+                    Map map = new HashMap();
+                    map.put("code",406);
+                    map.put("errorMsg",e.getMessage());
+
+                    outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
+                    outputStream.flush();
+
                     e.printStackTrace();
                     throw new RuntimeException(e);
                 }
@@ -123,6 +131,13 @@ public class ApplyServlet extends HttpServlet {
                     outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
                     outputStream.flush();
                 } catch (Exception e) {
+                    Map map = new HashMap();
+                    map.put("code",406);
+                    map.put("errorMsg",e.getMessage());
+
+                    outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
+                    outputStream.flush();
+
                     e.printStackTrace();
                     throw new RuntimeException(e);
                 }
@@ -136,6 +151,14 @@ public class ApplyServlet extends HttpServlet {
                     outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
                     outputStream.flush();
                 } catch (Exception e) {
+                    Map map = new HashMap();
+                    map.put("code",406);
+                    map.put("errorMsg",e.getMessage());
+
+                    outputStream.write(JSON.toJSONBytes(map,SerializerFeature.WriteMapNullValue));
+                    outputStream.flush();
+
+                    e.printStackTrace();
                     throw new RuntimeException(e);
                 }
                 break;
