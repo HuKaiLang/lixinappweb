@@ -1,4 +1,4 @@
-package edu.lixin.weixin.servlet.notice;
+package edu.lixin.weixin.servlet.Notice;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-@WebServlet(urlPatterns = "/weixin/updatenoties")
-public class UpdateNoticeServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/weixin/addnotices")
+public class CreateNoticeServlet extends HttpServlet {
     private static INoticeService service = BeanFactory.getInstance("noticeService", INoticeService.class);
 
     @Override
@@ -28,12 +27,8 @@ public class UpdateNoticeServlet extends HttpServlet {
         resp.setContentType("application/json;charset=utf-8");
         OutputStream outputStream = resp.getOutputStream();
 
-        String method = req.getParameter("method");
-
-        String notice_id = req.getParameter("notice_id");
         String notice_title = req.getParameter("notice_title");
         String notice_text_content = req.getParameter("notice_text_content");
-        String notice_img_path = req.getParameter("notice_img_path");
         String user_id = req.getParameter("user_id");
 
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
@@ -44,31 +39,21 @@ public class UpdateNoticeServlet extends HttpServlet {
         String notice_type = req.getParameter("notice_type");
         String notice_state = "active";
 
-        if (method.equals("update")){
-            Notice notice = new Notice();
-            try {
-                BeanUtils.setProperty(notice,"notice_id",notice_id);
-                BeanUtils.setProperty(notice, "notice_title", notice_title);
-                BeanUtils.setProperty(notice,"notice_text_content",notice_text_content);
-                BeanUtils.setProperty(notice,"notice_date",notice_date);
-                BeanUtils.setProperty(notice,"notice_type",notice_type);
-                BeanUtils.setProperty(notice,"notice_state",notice_state);
-                BeanUtils.setProperty(notice,"notice_img_path",notice_img_path);
-                BeanUtils.setProperty(notice,"user_id",user_id);
-                System.out.println(JSON.toJSONString(notice,SerializerFeature.WriteMapNullValue));
+        Notice notice = new Notice();
+        try {
+            BeanUtils.setProperty(notice,"notice_id",null);
+            BeanUtils.setProperty(notice, "notice_title", notice_title);
+            BeanUtils.setProperty(notice,"notice_text_content",notice_text_content);
+            BeanUtils.setProperty(notice,"notice_date",notice_date);
+            BeanUtils.setProperty(notice,"notice_type",notice_type);
+            BeanUtils.setProperty(notice,"notice_state",notice_state);
+            BeanUtils.setProperty(notice,"user_id",user_id);
+            System.out.println(JSON.toJSONString(notice,SerializerFeature.WriteMapNullValue));
 
-                service.update(notice);
-            }catch (Exception e){
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        }else if (method.equals("delete")){
-            try {
-                service.delete(Integer.parseInt(notice_id));
-            }catch (Exception e){
-                throw new RuntimeException(e);
-            }
+            service.add(notice);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
     }
 }

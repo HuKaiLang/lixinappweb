@@ -1,9 +1,8 @@
-package edu.lixin.weixin.servlet.notice;
+package edu.lixin.weixin.servlet.Notice;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.junit.platform.commons.logging.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
-import java.util.UUID;
-import java.util.logging.Logger;
 
 @WebServlet(urlPatterns = "/weixin/uploadpic")
 public class UploadPictureServlet extends HttpServlet {
