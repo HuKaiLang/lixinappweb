@@ -14,6 +14,7 @@ public class User {
     private String user_account_state;
     private String user_avatar_path;
     private String user_md5_password;
+    private float user_balance;
 
     public int getUser_id() {
         return user_id;
@@ -118,7 +119,16 @@ public class User {
                 ", user_account_state='" + user_account_state + '\'' +
                 ", user_avatar_path='" + user_avatar_path + '\'' +
                 ", user_md5_password='" + user_md5_password + '\'' +
+                ", user_balance=" + user_balance +
                 '}';
+    }
+
+    public float getUser_balance() {
+        return user_balance;
+    }
+
+    public void setUser_balance(float user_balance) {
+        this.user_balance = user_balance;
     }
 
     @Override

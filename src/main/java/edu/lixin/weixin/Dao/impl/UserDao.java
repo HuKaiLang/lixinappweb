@@ -26,7 +26,8 @@ public class UserDao implements IUserDao {
                 "user_charge," +
                 "user_account_state," +
                 "user_avatar_path," +
-                "user_md5_password) values(?,?,?,?,?,?,?,?,?,?,?);";
+                "user_md5_password," +
+                "user_balance) values(?,?,?,?,?,?,?,?,?,?,?,?);";
         try{
             qr.update(sql,
                     user.getUser_id(),
@@ -39,10 +40,11 @@ public class UserDao implements IUserDao {
                     user.getUser_charge(),
                     user.getUser_account_state(),
                     user.getUser_avatar_path(),
-                    user.getUser_md5_password()
+                    user.getUser_md5_password(),
+                    user.getUser_balance()
                     );
         }catch(Exception e){
-            System.out.println("--- UserDao Exception ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -53,7 +55,7 @@ public class UserDao implements IUserDao {
         try{
             qr.update(sql,user_id);
         }catch (Exception e){
-            System.out.println("--- UserDao Exception ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -70,7 +72,8 @@ public class UserDao implements IUserDao {
                 "user_charge=?," +
                 "user_account_state=?," +
                 "user_avatar_path=?," +
-                "user_md5_password=? where user_id=?";
+                "user_md5_password=?" +
+                "user_balance=? where user_id=?";
         try{
             qr.update(sql,user.getUser_name(),
                     user.getUser_gender(),
@@ -82,9 +85,10 @@ public class UserDao implements IUserDao {
                     user.getUser_account_state(),
                     user.getUser_avatar_path(),
                     user.getUser_md5_password(),
+                    user.getUser_balance(),
                     user.getUser_id());
         }catch (Exception e){
-            System.out.println("--- UserDao Exception ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -95,7 +99,7 @@ public class UserDao implements IUserDao {
             String sql = "select * from user";
             return qr.query(sql,new BeanListHandler<User>(User.class));
         }catch(Exception e){
-            System.out.println("--- UserDao Exceptions ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -106,7 +110,7 @@ public class UserDao implements IUserDao {
         try{
             return qr.query(sql,new BeanHandler<User>(User.class),user_id);
         }catch(Exception e){
-            System.out.println("--- UserDao Exceptions ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -117,7 +121,7 @@ public class UserDao implements IUserDao {
             String sql = "select * from user where user_name like ?";
             return qr.query(sql,new BeanListHandler<User>(User.class),"%"+keyword+"%");
         }catch(Exception e){
-            System.out.println("--- UserDao Exceptions ---");
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
