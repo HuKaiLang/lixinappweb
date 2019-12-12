@@ -1,0 +1,86 @@
+<table id="dg" title="奖状申请表" class="easyui-datagrid" style="width: 100%;height: 100%"
+       url="weixin/awards?method=query" method="get" toolbar="#toolbar"
+       rownumbers="true"
+       fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="award_id" width="50" hidden="true">申请ID</th>
+        <th field="user_school_id" width="50">申请者学号</th>
+        <th field="award_type" width="50">奖状申请类型</th>
+        <th field="award_request_reason" width="50">申请理由</th>
+        <th field="award_request_date" width="50">申请提交日期</th>
+        <th field="award_grade_point" width="50">申请人绩点</th>
+        <th field="award_request_deed" width="50">申请人事迹</th>
+        <th field="award_request_state" width="50">申请项状态</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addAward()">添加</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+       onclick="editAward()">修改</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true"
+       onclick="passAward()">通过</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true"
+       onclick="rejectAward()">拒绝</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+       onclick="deleteAward()">删除</a>
+</div>
+<div id="dlg" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
+     closed="true"
+     buttons="#dlg-buttons">
+    <div style="text-align: center" class="ftitle">申请信息</div>
+    <form id="fm" method="post" class="dialog-fm">
+        <div class="fitem" hidden="true">
+            <label>Award ID</label>
+            <input name="award_id" class="easyui-validatebox" hidden="true">
+        </div>
+        <div class="fitem fm-item">
+            <label>申请者学号</label>
+            <input name="user_school_id" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label style="flex: 1">申请类型</label>
+            <select name="award_type">
+                <option value="三好学生">三好学生</option>
+                <option value="学校一等奖">学校一等奖</option>
+                <option value="学校二等奖">学校二等奖</option>
+                <option value="学校三等奖">学校三等奖</option>
+                <option value="成绩优异奖">成绩优异奖</option>
+                <option value="优秀社会实践奖">优秀社会实践奖</option>
+            </select>
+        </div>
+        <div class="fitem fm-item">
+            <label>申请理由</label>
+            <textarea name="award_request_reason" required="true"></textarea>
+        </div>
+        <div class="fitem fm-item">
+            <label>申请项创建时间</label>
+            <input name="award_request_date" class="easyui-validatebox"
+                   data-options="validType:['date']" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label>申请者绩点</label>
+            <input name="award_grade_point" class="easyui-validatebox"
+                   data-options="validType:['intOrFloat']" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label>申请者事迹</label>
+            <textarea name="award_request_deed" required="true"></textarea>
+        </div>
+        <div class="fitem fm-item">
+            <label>申请项状态</label>
+            <select name="award_request_state" required="true">
+                <option value="review">待审核</option>
+                <option value="pass">通过</option>
+                <option value="reject">拒绝通过</option>
+                <option value="close">关闭</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveAward()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
