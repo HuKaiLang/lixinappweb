@@ -52,6 +52,18 @@
             },
         });
 
+        function loadMain(){
+            console.log("loadMain function called");
+            $.ajax({
+                url:'apply.html',
+                type:'get',
+                success:function (res) {
+                    let target = $("#main-content").html(res);
+                    $.parser.parse(target); // EasyUI控件在由ajax方法获取之后需要重新渲染
+                }
+            })
+        }
+
         function addItem() {
             console.log("addItem function called");
             $('#dlg').dialog('open').dialog('setTitle', 'New Apply');
@@ -275,13 +287,13 @@
 </head>
 <%-- 检查用户身份 --%>
 <jsp:include page="checkLogin.jsp"></jsp:include>
-<body>
+<body onload="loadMain()">
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand"><a href="#">主界面</a></li>
-            <li><a href="#">审核</a></li>
-            <li></li>
+            <li><a href="#">学生事务审核</a></li>
+            <li><a href="#">奖学金申请审核</a></li>
             <li><a href="#">登出</a></li>
         </ul>
     </div>
@@ -291,102 +303,10 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div>
-                        <h1>管理菜单</h1>
+                        <h1 style="text-align: center">管理菜单</h1>
                     </div>
-                    <table id="dg" title="学生事务申请表" class="easyui-datagrid" style="width: 100%;height: 100%"
-                           url="weixin/applies?method=query" method="get" toolbar="#toolbar"
-                           rownumbers="true"
-                           fitColumns="true" singleSelect="true">
-                        <thead>
-                        <tr>
-                            <th field="apply_id" width="50" hidden="true">申请ID</th>
-                            <th field="apply_type" width="50">申请类型</th>
-                            <th field="apply_name" width="50">申请人姓名</th>
-                            <th field="user_school_id" width="50">学号</th>
-                            <th field="apply_reason" width="50">申请理由</th>
-                            <th field="apply_grade" width="50">申请人年级</th>
-                            <th field="apply_department" width="50">申请人院系</th>
-                            <th field="apply_state" width="50">申请项状态</th>
-                            <th field="apply_create_date" width="50">申请创建日期</th>
-                        </tr>
-                        </thead>
-                    </table>
-                    <div id="toolbar">
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-                           onclick="editItem()">修改</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true"
-                           onclick="passItem()">通过</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true"
-                           onclick="rejectItem()">拒绝</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-                           onclick="deleteItem()">删除</a>
-                    </div>
-                    <div id="dlg" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
-                         closed="true"
-                         buttons="#dlg-buttons">
-                        <div style="text-align: center" class="ftitle">申请信息</div>
-                        <form id="fm" method="post" class="dialog-fm">
-                            <div class="fitem" hidden="true">
-                                <label>Apply ID</label>
-                                <input name="apply_id" class="easyui-validatebox" hidden="true">
-                            </div>
-                            <div class="fitem fm-item">
-                                <label style="flex: 1">申请类型</label>
-                                <select name="apply_type">
-                                    <option value="教务处版在读证明">教务处版在读证明</option>
-                                    <option value="校章版在读证明">校章版在读证明</option>
-                                    <option value="户籍证明">户籍证明</option>
-                                    <option value="打印成绩单">打印成绩单</option>
-                                    <option value="学生证充磁">学生证充磁</option>
-                                    <option value="保险理赔">保险理赔</option>
-                                    <option value="创新实践学分申请">创新实践学分申请</option>
-                                    <option value="摆摊申请">摆摊申请</option>
-                                    <option value="横幅申请">横幅申请</option>
-                                    <option value="海报申请">海报申请</option>
-                                </select>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请人姓名</label>
-                                <input name="apply_name" required="true"/>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请人学号</label>
-                                <input name="user_school_id" class="easyui-validatebox"
-                                       data-options="validType:['integer','length[5,20]']" required="true"/>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请理由</label>
-                                <textarea name="apply_reason" required="true"></textarea>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请人年级</label>
-                                <select name="apply_grade">
-                                    <option value="1">大一</option>
-                                    <option value="2">大二</option>
-                                    <option value="3">大三</option>
-                                    <option value="4">大四</option>
-                                </select>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请人院系</label>
-                                <input name="apply_department"/>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请项状态</label>
-                                <input name="apply_state"/>
-                            </div>
-                            <div class="fitem fm-item">
-                                <label>申请项创建时间</label>
-                                <input name="apply_create_date" class="easyui-validatebox"
-                                       data-options="validType:['date']" required="true"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="dlg-buttons">
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveItem()">保存</a>
-                        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
-                           onclick="javascript:$('#dlg').dialog('close')">取消</a>
+                    <div id="main-content">
+
                     </div>
                 </div>
             </div>
