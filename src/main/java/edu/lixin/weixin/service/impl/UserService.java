@@ -47,6 +47,16 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void updateUserBalance(int user_id, float user_balance) {
+        dao.updateUserBalance(user_id,user_balance);
+    }
+
+    @Override
+    public void updateUserCharge(int user_id, float user_charge) {
+        dao.updateUserCharge(user_id,user_charge);
+    }
+
+    @Override
     public User findBySchoolId(int user_school_id) {
         return dao.findBySchoolId(user_school_id);
     }

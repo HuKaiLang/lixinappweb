@@ -127,6 +127,28 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public void updateUserBalance(int user_id, float user_balance) {
+        String sql = "update user set user_balance = ? where user_id = ?";
+        try{
+            qr.update(sql,user_balance,user_id);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updateUserCharge(int user_id, float user_charge) {
+        String sql = "update user set user_charge = ? where user_id = ?";
+        try{
+            qr.update(sql,user_charge,user_id);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public int getTotalCount(PageBean<User> pb) {
         try{
             String sql = "select * from user";

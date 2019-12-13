@@ -18,6 +18,10 @@ public interface IUserDao {
 
     User userLogin(String user_name,String user_password);
 
+    void updateUserBalance(int user_id,float user_balance);
+
+    void updateUserCharge(int user_id,float user_charge);
+
     User findBySchoolId(int user_school_id);
 
     List<User>query(String keyword);

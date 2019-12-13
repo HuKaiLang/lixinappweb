@@ -21,4 +21,8 @@ public interface IUserService {
     User userLogin(String user_name,String user_password);
 
     User findBySchoolId(int user_school_id);
+
+    void updateUserBalance(int user_id, float user_balance);
+
+    void updateUserCharge(int user_id, float user_charge);
 }
