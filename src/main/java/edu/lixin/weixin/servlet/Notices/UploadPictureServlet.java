@@ -1,4 +1,4 @@
-package edu.lixin.weixin.servlet.Notice;
+package edu.lixin.weixin.servlet.Notices;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -32,8 +32,6 @@ public class UploadPictureServlet extends HttpServlet {
         factory.setSizeThreshold(sizeThreshold);
 
         File respository = new File(req.getSession().getServletContext().getRealPath("temp"));
-        System.out.println(req.getSession().getServletContext().getRealPath("temp"));
-        System.out.println(req.getRealPath("temp"));
 
         factory.setSizeThreshold(sizeThreshold);
 

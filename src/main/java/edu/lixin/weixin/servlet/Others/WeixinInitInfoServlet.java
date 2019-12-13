@@ -1,4 +1,4 @@
-package edu.lixin.weixin.servlet;
+package edu.lixin.weixin.servlet.Others;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

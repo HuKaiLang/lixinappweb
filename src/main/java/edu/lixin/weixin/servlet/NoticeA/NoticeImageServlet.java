@@ -1,4 +1,4 @@
-package edu.lixin.weixin.servlet;
+package edu.lixin.weixin.servlet.NoticeA;
 
 import Decoder.BASE64Encoder;
 
@@ -12,14 +12,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 
-@WebServlet(urlPatterns = "/weixin/swiper/posterDownload")
-public class SwiperPosterDownloads extends HttpServlet  {
+@WebServlet(urlPatterns = "/weixin/notice_img")
+public class NoticeImageServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Download function ----------------");
-
         String agent = req.getHeader("User-Agent");
         String filename = req.getParameter("filename");
+        String user_id = req.getParameter("user_id");
         String origin_filename = filename;
 
         System.out.println("filename = " + filename);
@@ -35,7 +34,8 @@ public class SwiperPosterDownloads extends HttpServlet  {
             filename = URLEncoder.encode(filename,"utf-8");
         }
         resp.setHeader("Content-Disposition","attachment;filename="+filename);
-        String aFile = getServletContext().getRealPath("files/weixin/poster/" + origin_filename);
+        String aFile = getServletContext().getRealPath("upload/notice/" + user_id + "/"+ origin_filename);
+        System.out.println(aFile + "requiring");
         FileInputStream fis = new FileInputStream(aFile);
         OutputStream out = resp.getOutputStream();
         int len = 0;

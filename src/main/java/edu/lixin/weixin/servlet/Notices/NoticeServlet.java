@@ -1,4 +1,4 @@
-package edu.lixin.weixin.servlet.Notice;
+package edu.lixin.weixin.servlet.Notices;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -47,7 +47,6 @@ public class NoticeServlet extends HttpServlet {
 
 
         if(req.getMethod().equals("POST") ){
-            System.out.println("POST 初始化");
             InputStream is = req.getInputStream();
             String contentStr = IOUtils.toString(is,"utf-8");
             JSONObject jsonObject = JSONObject.parseObject(contentStr);
@@ -63,7 +62,6 @@ public class NoticeServlet extends HttpServlet {
             if (notice_date==null){
                 SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date(System.currentTimeMillis());
-                System.out.println(formatter.format(date));
                 notice_date = formatter.format(date);
             }
 
