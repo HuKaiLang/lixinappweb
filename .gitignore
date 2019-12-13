@@ -3,3 +3,4 @@
 *.class
 /out/
 out/artifacts/lixinappweb_Web_exploded/WEB-INF/classes/edu/lixin/weixin/servlet/AppsServlet.class
+*.class
