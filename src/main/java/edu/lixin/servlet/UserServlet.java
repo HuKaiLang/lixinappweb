@@ -32,19 +32,6 @@ public class UserServlet extends HttpServlet {
         String method = parameterUtils.parseParameter("method");
         String user_school_id = parameterUtils.parseParameter("user_school_id");
 
-//        if(req.getMethod().equals("POST")){
-//            Map<String, String> params = new HashMap<>();
-//            Map<String, String[]> parameterMap = req.getParameterMap();
-//            if (parameterMap != null) {
-//                for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-//                    params.put(entry.getKey(), entry.getValue()[0]);
-//                }
-//            }
-//            method = params.get("method");
-//        }else{
-//            method = req.getParameter("method");
-//        }
-
         if(method == null){
             List<User> list = service.query();
 
