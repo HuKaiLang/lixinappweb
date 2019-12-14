@@ -32,7 +32,7 @@ public class ParameterUtils {
         }
     }
 
-    public String parseParameter(String key)  {
+    public String parseFormParameter(String key)  {
         String value;
         if (this.req.getMethod().equals("POST")){
             value = this.jsonObject.getString(key);
@@ -43,7 +43,7 @@ public class ParameterUtils {
         }
     }
 
-    public String parseFormParameter(String key){
+    public String parseOriginParameter(String key){
         String value;
         if (this.req.getMethod().equals("POST")){
             value = params.get(key);

@@ -26,11 +26,11 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
        onclick="deleteAward()">删除</a>
 </div>
-<div id="dlg" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
+<div id="dlg2" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
      closed="true"
      buttons="#dlg-buttons">
     <div style="text-align: center" class="ftitle">申请信息</div>
-    <form id="fm" method="post" class="dialog-fm">
+    <form id="fm2" method="post" class="dialog-fm">
         <div class="fitem" hidden="true">
             <label>Award ID</label>
             <input name="award_id" class="easyui-validatebox" hidden="true">
@@ -82,5 +82,5 @@
 <div id="dlg-buttons">
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveAward()">保存</a>
     <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
-       onclick="javascript:$('#dlg').dialog('close')">取消</a>
+       onclick="javascript:$('#dlg2').dialog('close')">取消</a>
 </div>

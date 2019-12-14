@@ -32,14 +32,14 @@ public class ArticleServlet extends HttpServlet {
         ParameterUtils parameterUtils = new ParameterUtils(req);
         OutputStream outputStream = resp.getOutputStream();
 
-        String method = parameterUtils.parseParameter("method");
-        String article_id = parameterUtils.parseParameter("article_id");
-        String article_content = parameterUtils.parseParameter("article_content");
-        String article_title = parameterUtils.parseParameter("article_title");
-        String article_date = parameterUtils.parseParameter("article_date");
-        String article_state = parameterUtils.parseParameter("article_state");
-        String article_img_path = parameterUtils.parseParameter("article_img_path");
-        String article_author = parameterUtils.parseParameter("article_author");
+        String method = parameterUtils.parseFormParameter("method");
+        String article_id = parameterUtils.parseFormParameter("article_id");
+        String article_content = parameterUtils.parseFormParameter("article_content");
+        String article_title = parameterUtils.parseFormParameter("article_title");
+        String article_date = parameterUtils.parseFormParameter("article_date");
+        String article_state = parameterUtils.parseFormParameter("article_state");
+        String article_img_path = parameterUtils.parseFormParameter("article_img_path");
+        String article_author = parameterUtils.parseFormParameter("article_author");
 
         Map parameterMap = req.getParameterMap();
 

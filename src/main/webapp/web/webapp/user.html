@@ -1,0 +1,90 @@
+<table id="dg" title="账户管理表" class="easyui-datagrid" style="width: 100%;height: 100%"
+       url="weixin/user?method=query" method="post" toolbar="#toolbar"
+       rownumbers="true"
+       fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="user_id" width="50" hidden="true">用户ID</th>
+        <th field="user_name" width="50">用户名</th>
+        <th field="user_gender" width="50">用户性别</th>
+        <th field="user_phone_number" width="50">用户电话号码</th>
+        <th field="user_email" width="50">用户邮箱地址</th>
+        <th field="user_identity" width="50">用户身份</th>
+        <th field="user_school_id" width="50">用户学号</th>
+        <th field="user_charge" width="50">用户水电费</th>
+        <th field="user_account_state" width="50">用户账户状态</th>
+        <th field="user_avatar_path" width="50" hidden="true">用户头像文件路径</th>
+        <th field="user_md5_paddword" width="50" hidden="true">用户加密密码</th>
+        <th field="user_balance" width="50">用户余额</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUser()">添加</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+       onclick="editUser()">修改</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+       onclick="deleteAUser()">删除</a>
+</div>
+<div id="dlg3" class="easyui-dialog" style="width: 400px;height: 280px;padding: 10px 20px"
+     closed="true"
+     buttons="#dlg-buttons">
+    <div style="text-align: center" class="ftitle">申请信息</div>
+    <form id="fm" method="post" class="dialog-fm">
+        <div class="fitem" hidden="true">
+            <label>User ID</label>
+            <input name="user_id" class="easyui-validatebox" hidden="true">
+        </div>
+        <div class="fitem fm-item">
+            <label style="flex: 1">用户性别</label>
+            <select name="user_gender">
+                <option value="1">男</option>
+                <option value="0">女</option>
+            </select>
+        </div>
+        <div class="fitem fm-item">
+            <label>手机号码</label>
+            <input name="user_phone_number" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label>邮箱地址</label>
+            <input name="user_email" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label style="flex: 1">用户身份</label>
+            <select name="user_identity">
+                <option value="student">学生</option>
+                <option value="teacher">老师</option>
+                <option value="admin">管理员</option>
+            </select>
+        </div>
+        <div class="fitem fm-item">
+            <label>用户电费</label>
+            <input name="user_charge" required="true"/>
+        </div>
+        <div class="fitem fm-item">
+            <label style="flex: 1">用户状态</label>
+            <select name="user_account_state">
+                <option value="active">激活</option>
+                <option value="close">封禁</option>
+            </select>
+        </div>
+        <div class="fitem" hidden="true">
+            <label>头像路径</label>
+            <input name="user_avatar_path" class="easyui-validatebox" hidden="true">
+        </div>
+        <div class="fitem" hidden="true">
+            <label>用户加密密码</label>
+            <input name="user_md5_passwd" class="easyui-validatebox" hidden="true">
+        </div>
+        <div class="fitem fm-item">
+            <label>用户余额</label>
+            <input name="user_balance" required="true"/>
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:$('#dlg3').dialog('close')">取消</a>
+</div>

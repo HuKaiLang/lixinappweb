@@ -25,9 +25,9 @@ $.extend($.fn.validatebox.defaults.rules, {
 });
 
 function loadMain(){
-    console.log("loadMain function called");
-    // loadApply();
-    loadAward();
+    // parseUserHtml();
+    loadApply();
+    //loadAward();
 }
 
 /* 加载Apply表格 */
@@ -65,7 +65,7 @@ function editItem() {
     var row = $('#dg').datagrid('getSelected');
     if (row) {
         $('#dlg').dialog('open').dialog('setTitle', 'Edit Apply');
-        $('#fm').form('load', row);
+        $('#fm2').form('load', row);
     } else {
         $.messager.show({
             title: 'Error',
@@ -278,7 +278,7 @@ function saveItem() {
 
 function addAward(){
     console.log("addAward function called");
-    $('#dlg').dialog('open').dialog('setTitle', 'New Award');
+    $('#dlg2').dialog('open').dialog('setTitle', 'New Award');
     $('#dialog').form('clear');
 }
 
@@ -286,8 +286,8 @@ function editAward() {
     console.log("editAward function called");
     var row = $('#dg').datagrid('getSelected');
     if (row) {
-        $('#dlg').dialog('open').dialog('setTitle', 'Edit Award');
-        $('#fm').form('load', row);
+        $('#dlg2').dialog('open').dialog('setTitle', 'Edit Award');
+        $('#fm2').form('load', row);
     } else {
         $.messager.show({
             title: 'Error',
@@ -307,7 +307,7 @@ function deleteAward() {
                     award_id: row.award_id
                 }, function (result) {
                     if (result.code = 200) {
-                        $('#dlg').dialog('close');
+                        $('#dlg2').dialog('close');
                         $('#dg').datagrid('reload');
                     } else {
                         $.messager.show({
@@ -347,7 +347,7 @@ function passAward(){
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    $('#dlg').dialog('close');
+                    $('#dlg2').dialog('close');
                     $('#dg').datagrid('reload');
                     $.messager.show({
                         title: "成功",
@@ -389,7 +389,7 @@ function rejectAward(){
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    $('#dlg').dialog('close');
+                    $('#dlg2').dialog('close');
                     $('#dg').datagrid('reload');
                     $.messager.show({
                         title: "成功",
@@ -421,7 +421,7 @@ function saveAward() {
     var award_request_deed = $("[name='award_request_deed']").val();
     var award_request_state = $("[name='award_request_state']").val();
 
-    var title = $('#dlg').panel('options').title;
+    var title = $('#dlg2').panel('options').title;
 
     if (title == 'New Award') {
         $.ajax({
@@ -441,7 +441,7 @@ function saveAward() {
             dataType: "json",
             success: function (result) {
                 if (result.code == 200) {
-                    $('#dlg').dialog('close');
+                    $('#dlg2').dialog('close');
                     $('#dg').datagrid('reload');
                     $.messager.show({
                         title: "成功",
@@ -473,7 +473,7 @@ function saveAward() {
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    $('#dlg').dialog('close');
+                    $('#dlg2').dialog('close');
                     $('#dg').datagrid('reload');
                     $.messager.show({
                         title: "成功",

@@ -31,6 +31,7 @@
     <script type="text/javascript" src="jquery.easyui.min.js"></script>
     <script type="text/css" src="webapp/admin.css"></script>
     <script type="text/javascript" src="webapp/admin.js"></script>
+    <script type="text/javascript" src="webapp/user.js"></script>
 </head>
 <%-- 检查用户身份 --%>
 <jsp:include page="webapp/checkLogin.jsp"></jsp:include>
