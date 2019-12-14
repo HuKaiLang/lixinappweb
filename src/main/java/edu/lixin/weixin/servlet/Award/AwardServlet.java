@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +68,15 @@ public class AwardServlet extends HttpServlet {
             award_grade_point = req.getParameter("award_grade_point");
             award_request_deed = req.getParameter("award_request_deed");
             award_request_state = req.getParameter("award_request_state");
+        }
+
+        if(award_request_date == null){
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(System.currentTimeMillis());
+            award_request_date = formatter.format(date);
+        }
+        if(award_request_state == null){
+            award_request_state = "review";
         }
 
         Award award;

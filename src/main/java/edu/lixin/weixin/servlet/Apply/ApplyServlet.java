@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +71,15 @@ public class ApplyServlet extends HttpServlet {
             apply_department = req.getParameter("apply_department");
             apply_state = req.getParameter("apply_state");
             apply_create_date = req.getParameter("apply_create_date");
+        }
+
+        if(apply_create_date == null){
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(System.currentTimeMillis());
+            apply_create_date = formatter.format(date);
+        }
+        if(apply_state == null){
+            apply_state = "review";
         }
 
         Apply apply;
